@@ -1,6 +1,27 @@
 {
   "name": "domain",
+  "private": true,
   "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT"
+  "description": "",
+  "main": "src/main.ts",
+  "scripts": {
+    "eslint": "eslint",
+    "dev": "nodemon src/main.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tsed/di": "^6.3.4",
+    "@typegoose/typegoose": "^7.4.2",
+    "axios": "^0.21.0",
+    "cheerio": "^1.0.0-rc.3",
+    "mongoose": "^5.10.14",
+    "reflect-metadata": "^0.1.13",
+    "typescript": "^4.0.5"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/cheerio": "^0.22.22",
+    "@types/mongoose": "^5.10.0"
+  }
 }
