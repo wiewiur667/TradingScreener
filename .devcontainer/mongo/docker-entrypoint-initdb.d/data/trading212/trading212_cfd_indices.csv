@@ -1,0 +1,46 @@
+Instrument,MinTradedQty,MarginRetail,MarginProfessional,LongPosSwap,ShortPosSwap,MarketH
+Lyxor MSCI South Africa,1,10%,4%,-0.002779,-0.000652,7:00 am to 3:30 pm
+Lyxor Hang Seng China Enterprise ETF,1,10%,4%,-0.020308,-0.009546,7:00 am to 3:30 pm
+Lyxor Australia S&P/ASX 200,1,10%,1%,-0.004160,-0.000976,7:00 am to 3:30 pm
+Lyxor Stoxx Europe 600 Automobiles & Parts ETF,1,10%,2%,-0.008458,-0.003976,7:00 am to 3:30 pm
+Lyxor BEL 20,1,10%,4%,-0.005262,-0.001234,7:00 am to 3:30 pm
+Lyxor Stoxx Europe 600 Banks ETF,1,10%,2%,-0.001708,-0.000803,7:00 am to 3:30 pm
+Amundi MSCI Nordic,1,10%,4%,-0.047264,-0.011087,7:00 am to 3:30 pm
+Amundi ETF MSCI Spain,1,10%,2%,-0.015748,-0.003694,7:00 am to 3:30 pm
+Dollar Index-14Dec20,0.1,10%,0.5%,-0.008281,-0.004864,12:00 am to 8:00 pm
+iShares MSCI Denmark,1,20%,4%,-0.007260,-0.004264,1:30 pm to 8:00 pm
+iShares MSCI Finland,1,20%,4%,-0.003466,-0.002036,1:30 pm to 8:00 pm
+iShares MSCI Israel,1,20%,2%,-0.004454,-0.002616,1:30 pm to 8:00 pm
+iShares MSCI Norway,1,20%,4%,-0.001744,-0.001024,1:30 pm to 8:00 pm
+iShares MSCI New Zealand,1,20%,2%,-0.005046,-0.002964,1:30 pm to 8:00 pm
+iShares MSCI Poland,1,20%,4%,-0.001402,-0.000824,1:30 pm to 8:00 pm
+EURO STOXX 50,0.001,5%,0.2%,-0.267172,0.004380,12:11 am to 8:00 pm
+Canada ETF,1,20%,1%,-0.003743,-0.002760,1:30 pm to 8:00 pm
+iShares MSCI Sweden,1,20%,4%,-0.002994,-0.001759,1:30 pm to 8:00 pm
+iShares MSCI Singapore,1,20%,4%,-0.001614,-0.000948,1:30 pm to 8:00 pm
+iShares MSCI Mexico,1,20%,4%,-0.002819,-0.001656,1:30 pm to 8:00 pm
+iShares MSCI Brazil,1,20%,2%,-0.003936,-0.002902,1:30 pm to 8:00 pm
+Lyxor Stoxx Europe 600 Financial Services (Acc),1,10%,4%,-0.010848,-0.005099,7:00 am to 3:30 pm
+France 40,0.001,5%,0.2%,-0.402960,0.006606,6:00 am to 8:00 pm
+Germany 30,0.001,5%,0.2%,-1.063391,0.017433,12:11 am to 8:00 pm
+Lyxor Stoxx Europe 600 Healthcare ETF,1,10%,2%,-0.017739,-0.008339,7:00 am to 3:30 pm
+Lyxor HSI Hong Kong ETF,1,10%,2%,-0.003878,-0.001823,7:00 am to 3:30 pm
+Lyxor MSCI India,1,10%,4%,-0.002489,-0.001170,7:00 am to 3:30 pm
+Lyxor Stoxx Europe 600 Insurance ETF,1,10%,4%,-0.005293,-0.002488,7:00 am to 3:30 pm
+Italy 40,0.001,10%,0.2%,-1.592566,0.026108,6:00 am to 8:00 pm
+Japan 225,0.001,5%,0.2%,-1.222597,-1.351292,10:00 pm to 9:00 pm
+Lyxor MSCI Korea ETF,1,10%,2%,-0.008912,-0.004190,7:00 am to 3:30 pm
+Lyxor MSCI Malaysia,1,10%,4%,-0.001438,-0.000337,7:00 am to 3:30 pm
+Lyxor Stoxx Europe 600 Media ETF,20,10%,2%,-0.004987,-0.002344,7:00 am to 3:30 pm
+NASDAQ 100,0.001,5%,0.2%,-0.664723,-0.262798,10:00 pm to 9:00 pm
+Netherlands 25,0.1,10%,0.2%,-0.045837,0.000751,6:00 am to 8:00 pm
+Lyxor MSCI Russia,1,10%,5%,-0.001364,0.001364,7:00 am to 3:30 pm
+SPX 500,0.01,5%,0.2%,-0.196164,-0.077553,10:00 pm to 9:00 pm
+Switzerland 20,0.001,10%,0.2%,-0.213969,-0.641906,6:00 am to 8:00 pm
+Lyxor Stoxx Europe 600 Telecoms ETF,1,10%,2%,-0.004604,-0.002164,7:00 am to 3:30 pm
+Lyxor Stoxx Europe 600 Tech ETF,1,10%,2%,-0.010110,-0.004752,7:00 am to 3:30 pm
+Lyxor MSCI Turkey,1,10%,2%,-0.002265,-0.000531,7:00 am to 3:30 pm
+Lyxor MSCI Taiwan,1,10%,4%,-0.001935,-0.000454,7:00 am to 3:30 pm
+UK 100,0.001,5%,0.2%,-0.365438,-0.121812,12:00 am to 8:00 pm
+US 30,0.001,5%,0.2%,-1.613485,-0.637890,10:00 pm to 9:00 pm
+Xtrackers MSCI Indonesia,1,10%,4%,-0.001101,-0.000258,7:00 am to 3:30 pm
