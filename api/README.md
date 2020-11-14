@@ -1,4 +1,4 @@
-# trading-screener
+# api
 
 > An awesome project based on Ts.ED framework
 
