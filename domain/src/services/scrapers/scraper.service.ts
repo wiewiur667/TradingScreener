@@ -1,3 +1,4 @@
+import { Service } from '@tsed/di';
 import { IScraperService } from './scraper-service.interface';
 
 /**
@@ -8,6 +9,7 @@ import { IScraperService } from './scraper-service.interface';
  * @implements {IScraperService}
  */
 
+@Service()
 export class ScraperService implements IScraperService {
   results?: Array<unknown> = [];
   

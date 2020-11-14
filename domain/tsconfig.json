@@ -3,12 +3,13 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src",
+    "baseUrl": "./src",
     "paths": {
-      "@infrastructure/*": ["./Domain/src/infrastructure/*"],
-      "@stores/*": ["./Domain/src/stores/*"],
-      "@services/*": ["./Domain/src/services/*"],
-      "@plugins/*": ["./Domain/src/plugins/*"],
-      "@models/*": ["./Domain/src/models/*"]
+      "@infrastructure*": ["./infrastructure/*"],
+      "@stores*": ["./stores/*"],
+      "@services*": ["./services/*"],
+      "@plugins*": ["./plugins/*"],
+      "@models*": ["./models/*"]
     },
     "lib": [
       "es7",

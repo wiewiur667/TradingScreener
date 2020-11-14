@@ -6,5 +6,9 @@
   "author": "Sebastian Siewien <s.siewien@gmail.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": ["api", "domain"]
+  "workspaces": ["api", "domain"],
+  "scripts": {
+    "build:domain": "tsc --build ./domain",
+    "start": " yarn build:domain && yarn --cwd ./api start"
+  }
 }

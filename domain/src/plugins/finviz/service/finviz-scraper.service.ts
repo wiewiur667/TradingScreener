@@ -6,7 +6,8 @@ import { FinVizRating } from '../model/finviz-rating.model';
 import { IScraperServicePlugin } from '@plugins/scraper-service-plugin.interface';
 import { IScraperConfiguration } from '@infrastructure/config/scraper-configuration.interface';
 import { Configuration } from '@infrastructure/configuration';
-import { Service } from '@tsed/di';
+import { ProviderScope, Scope, Service } from '@tsed/di';
+import { SignatureKind } from 'typescript';
 
 /**
  * FinViz scraper service
@@ -15,7 +16,7 @@ import { Service } from '@tsed/di';
  * @class FinVizScraperService
  * @implements {IScraperServicePlugin}
  */
-
+@Scope(ProviderScope.SINGLETON)
 export class FinVizScraperService implements IScraperServicePlugin {
   config: IScraperConfiguration;
 

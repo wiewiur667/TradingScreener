@@ -1,4 +1,4 @@
-import {IScraperConfiguration} from "@infrastructure/config/scraper-configuration.interface"
+import { IScraperConfiguration } from "@infrastructure/config/scraper-configuration.interface";
 
 export interface IConfiguration {
   general: {
