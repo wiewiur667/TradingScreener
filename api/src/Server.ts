@@ -1,12 +1,12 @@
 import {Configuration, Inject} from "@tsed/di";
 import {PlatformApplication} from "@tsed/common";
 import "@tsed/platform-express"; // /!\ keep this import
-import * as bodyParser from "body-parser";
-import * as compress from "compression";
-import * as cookieParser from "cookie-parser";
-import * as methodOverride from "method-override";
-import * as cors from "cors";
-import * as helmet from "helmet";
+import bodyParser from "body-parser";
+import compress from "compression";
+import cookieParser from "cookie-parser";
+import methodOverride from "method-override";
+import cors from "cors";
+import helmet from "helmet";
 import "@tsed/ajv";
 import "@tsed/swagger";
 
@@ -29,10 +29,10 @@ export const rootDir = __dirname;
 })
 export class Server {
   @Inject()
-  app: PlatformApplication;
+  app!: PlatformApplication;
 
   @Configuration()
-  settings: Configuration;
+  settings!: Configuration;
 
   $beforeRoutesInit(): void {
     this.app
