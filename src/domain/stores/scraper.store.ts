@@ -1,7 +1,7 @@
-import {getModelForClass, getModelWithString, DocumentType} from "@typegoose/typegoose";
-import {BaseStore} from "./base.store";
-import {Screener} from "@models/screeners/screener.model";
-import {ScreenerModelBase} from "@models/screeners/screener-model-base.model";
+import { getModelForClass, getModelWithString, DocumentType } from "@typegoose/typegoose";
+import { ScreenerModelBase } from "../models/screeners/screener-model-base.model";
+import { Screener } from "../models/screeners/screener.model";
+import { BaseStore } from "./base.store";
 
 export class ScraperStore extends BaseStore {
   private screenerModel = getModelForClass(Screener);
@@ -16,6 +16,6 @@ export class ScraperStore extends BaseStore {
   }
 
   async getScraper(screenerName: string): Promise<DocumentType<Screener> | null> {
-    return await this.screenerModel.findOne({Name: screenerName});
+    return await this.screenerModel.findOne({ Name: screenerName });
   }
 }

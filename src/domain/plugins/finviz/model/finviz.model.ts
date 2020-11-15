@@ -1,14 +1,13 @@
-import {modelOptions, prop} from "@typegoose/typegoose";
+import { modelOptions, prop } from "@typegoose/typegoose";
 
-import {FinVizRating} from "./finviz-rating.model";
+import { FinVizRating } from "./finviz-rating.model";
 
-import {mapString, mapNumber, mapRange, mapBool} from "./decorators";
+import { mapString, mapNumber, mapRange, mapBool } from "./decorators";
 
-import {DocumentType} from "@typegoose/typegoose";
+import { DocumentType } from "@typegoose/typegoose";
+import { ScreenerModelBase } from "../../../models/screeners/screener-model-base.model";
 
-import {ScreenerModelBase} from "@models/screeners/screener-model-base.model";
-
-@modelOptions({schemaOptions: {collection: "scrapingResults"}})
+@modelOptions({ schemaOptions: { collection: "scrapingResults" } })
 export class FinVizModel extends ScreenerModelBase {
   store<FinVizModel>(this: DocumentType<FinVizModel>): void {
     this.save();
@@ -346,7 +345,7 @@ export class FinVizModel extends ScreenerModelBase {
   @prop()
   Change_Pct?: number;
 
-  @prop({type: () => [FinVizRating]})
+  @prop({ type: () => [FinVizRating] })
   Ratings?: FinVizRating[];
 
   parseNumber(numberString: string): number {

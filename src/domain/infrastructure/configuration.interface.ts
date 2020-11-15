@@ -1,4 +1,4 @@
-import {IScraperConfiguration} from "./config/scraper-configuration.interface";
+import { IScraperConfiguration } from "./config/scraper-configuration.interface";
 
 export interface IConfiguration {
   general: {
@@ -7,7 +7,5 @@ export interface IConfiguration {
     dbName: string;
   };
 
-  scrapers: IScraperConfiguration[];
-
-  getScraperConfig(name: string): IScraperConfiguration;
+  screeners: IScraperConfiguration[];
 }

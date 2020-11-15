@@ -1,12 +1,12 @@
 import axios from "axios";
-import cheerio from "cheerio";
+import * as cheerio from "cheerio";
 
-import {FinVizModel} from "../model/finviz.model";
-import {FinVizRating} from "../model/finviz-rating.model";
-import {IScraperServicePlugin} from "@plugins/scraper-service-plugin.interface";
-import {IScraperConfiguration} from "@infrastructure/config/scraper-configuration.interface";
-import {Configuration} from "@infrastructure/configuration";
-import {ProviderScope, Scope} from "@tsed/di";
+import { FinVizModel } from "../model/finviz.model";
+import { FinVizRating } from "../model/finviz-rating.model";
+import { IScraperServicePlugin } from "../../scraper-service-plugin.interface";
+import { IScraperConfiguration } from "../../../infrastructure/config/scraper-configuration.interface";
+import { ProviderScope, Scope } from "@tsed/di";
+import { ConfigurationService } from "../../../infrastructure/configuration";
 
 /**
  * FinViz scraper service
@@ -19,7 +19,7 @@ import {ProviderScope, Scope} from "@tsed/di";
 export class FinVizScraperService implements IScraperServicePlugin {
   config: IScraperConfiguration;
 
-  constructor(config: Configuration) {
+  constructor(config: ConfigurationService) {
     this.config = config.getScraperConfig("FinViz");
   }
   /**
@@ -37,7 +37,6 @@ export class FinVizScraperService implements IScraperServicePlugin {
         headers: this.config.options.headers
       });
       const $ = cheerio.load(response.data);
-
       const model = new FinVizModel();
 
       const table = $("table.snapshot-table2 td")
@@ -61,7 +60,7 @@ export class FinVizScraperService implements IScraperServicePlugin {
 
       return (model as unknown) as FinVizModel;
     } catch (error) {
-      //console.error("Failed to parse: ", error)
+      console.error("Failed to parse: ", error);
     }
   }
 

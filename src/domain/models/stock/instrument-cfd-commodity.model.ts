@@ -1,6 +1,6 @@
-import {modelOptions} from "@typegoose/typegoose";
+import { modelOptions } from "@typegoose/typegoose";
 
-import {CFD} from "./instrument-cfd.abstract.model";
+import { CFD } from "./instrument-cfd.abstract.model";
 /**
  * Model containing Trading212 CFD Commodities
  *
@@ -8,5 +8,5 @@ import {CFD} from "./instrument-cfd.abstract.model";
  * @class CFDCommodity
  * @extends {CFD}
  */
-@modelOptions({schemaOptions: {collection: "instruments.trading212.cfd.commodity"}})
+@modelOptions({ schemaOptions: { collection: "instruments.trading212.cfd.commodity" } })
 export class CFDCommodity extends CFD {}

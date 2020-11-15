@@ -28,7 +28,7 @@ export class BaseStore {
 
   async checkCollectionExists(collectionName: string): Promise<boolean> {
     if (this.client) {
-      const collections = await this.client.db.listCollections({name: collectionName}, {nameOnly: true}).toArray();
+      const collections = await this.client.db.listCollections({ name: collectionName }, { nameOnly: true }).toArray();
       return collections.find((c) => c.name == collectionName) != null;
     }
 

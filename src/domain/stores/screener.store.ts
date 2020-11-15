@@ -1,7 +1,7 @@
-import {getModelForClass} from "@typegoose/typegoose";
-import {BaseStore} from "./base.store";
-import {Screener} from "@models/screeners/screener.model";
-import {IConfiguration} from "@infrastructure/configuration.interface";
+import { getModelForClass } from "@typegoose/typegoose";
+import { BaseStore } from "./base.store";
+import { Screener } from "@models/screeners/screener.model";
+import { IConfiguration } from "@infrastructure/configuration.interface";
 
 export class ScreenerStore {
   private screenerModel = getModelForClass(Screener);
@@ -20,7 +20,7 @@ export class ScreenerStore {
   }
 
   async getScreener(name: string): Promise<Screener | null> {
-    return (await this.screenerModel.findOne({Name: name}).exec())?.toObject();
+    return (await this.screenerModel.findOne({ Name: name }).exec())?.toObject();
   }
 
   async addScreener(screener: Screener): Promise<void> {
@@ -29,13 +29,13 @@ export class ScreenerStore {
   }
 
   async updateScreener(screener: Screener): Promise<void> {
-    const screenerInstance = await this.screenerModel.findOne({Name: screener.Name}).exec();
+    const screenerInstance = await this.screenerModel.findOne({ Name: screener.Name }).exec();
     await screenerInstance?.update(screener);
     await screenerInstance?.save();
   }
 
   async deleteScreener(name: string): Promise<void> {
-    const screenerInstance = await this.screenerModel.findOne({Name: name}).exec();
+    const screenerInstance = await this.screenerModel.findOne({ Name: name }).exec();
     await screenerInstance?.remove();
   }
 }

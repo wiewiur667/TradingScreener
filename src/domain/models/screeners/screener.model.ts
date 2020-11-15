@@ -1,5 +1,5 @@
-import {prop} from "@typegoose/typegoose";
-import {ScreenInstrument} from "./screen-instrument.model";
+import { prop } from "@typegoose/typegoose";
+import { ScreenInstrument } from "./screen-instrument.model";
 
 export class Screener {
   @prop()
@@ -10,6 +10,6 @@ export class Screener {
   Description?: string;
   @prop()
   Enabled?: boolean = true;
-  @prop({type: () => [ScreenInstrument]})
+  @prop({ type: () => [ScreenInstrument] })
   Instruments?: ScreenInstrument[] = [];
 }

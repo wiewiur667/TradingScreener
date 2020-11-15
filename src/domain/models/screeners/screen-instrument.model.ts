@@ -1,4 +1,4 @@
-import {prop} from "@typegoose/typegoose/lib/prop";
+import { prop } from "@typegoose/typegoose/lib/prop";
 
 export class ScreenInstrument {
   @prop()

@@ -1,5 +1,5 @@
-import {DocumentType, prop} from "@typegoose/typegoose";
-import {IScraperModel} from "./scraper-model.interface";
+import { DocumentType, prop } from "@typegoose/typegoose";
+import { IScraperModel } from "./scraper-model.interface";
 
 export abstract class ScreenerModelBase implements IScraperModel {
   abstract map(data: Map<string, unknown>): void;

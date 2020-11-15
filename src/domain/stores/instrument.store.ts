@@ -1,12 +1,12 @@
-import {IConfiguration} from "@infrastructure/configuration.interface";
-import {IInstrumentModel} from "@models/IInstrumentModel.interface";
-import {Equity} from "@models/stock/equity.model";
-import {CFDCommodity} from "@models/stock/instrument-cfd-commodity.model";
-import {CFDForex} from "@models/stock/instrument-cfd-forex.model";
-import {CFDIndex} from "@models/stock/instrument-cfd-index.model";
-import {CFDStock} from "@models/stock/instrument-cfd-stock.model";
-import {getModelForClass} from "@typegoose/typegoose";
-import {BaseStore} from "./base.store";
+import { getModelForClass } from "@typegoose/typegoose";
+import { IConfiguration } from "../infrastructure/configuration.interface";
+import { IInstrumentModel } from "../models/IInstrumentModel.interface";
+import { Equity } from "../models/stock/equity.model";
+import { CFDCommodity } from "../models/stock/instrument-cfd-commodity.model";
+import { CFDForex } from "../models/stock/instrument-cfd-forex.model";
+import { CFDIndex } from "../models/stock/instrument-cfd-index.model";
+import { CFDStock } from "../models/stock/instrument-cfd-stock.model";
+import { BaseStore } from "./base.store";
 
 export class InstrumentStore {
   private baseStore?: BaseStore;

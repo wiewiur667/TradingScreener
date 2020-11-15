@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import {ScraperService} from "@services/scrapers/scraper.service";
-import {Controller, Get} from "@tsed/common";
+import { ScraperService } from "../domain/services/scrapers/scraper.service";
+import { Controller, Get, QueryParams } from "@tsed/common";
 
 @Controller("/hello-world")
 export class HelloWorldController {
+  test: string[];
   private _scraperService: ScraperService;
 
   constructor(scraperService: ScraperService) {
@@ -11,12 +12,13 @@ export class HelloWorldController {
   }
   @Get("/")
   get() {
+    this.test?.push("assad");
     return "hello";
   }
 
-  @Get("/scraper")
-  async scraper() {
-    await this._scraperService.scrape("FinViz", ["MSFT"]);
-    return this._scraperService.results;
+  @Get("/scrape")
+  async scraper(@QueryParams("scraper") scraper: string, @QueryParams("symbols") symbols: string[]) {
+    await this._scraperService.scrape(scraper, symbols);
+    return JSON.stringify(Array.from(this._scraperService.results.entries()));
   }
 }

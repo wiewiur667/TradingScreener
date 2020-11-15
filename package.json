@@ -2,7 +2,7 @@
   "name": "@project/server",
   "version": "1.0.0",
   "description": "",
-  "private":true,
+  "private": true,
   "scripts": {
     "build": "yarn tsc",
     "tsc": "tsc --project tsconfig.compile.json",
@@ -14,7 +14,7 @@
     "test:coverage": "yarn test:unit",
     "test:lint": "eslint src --ext .ts",
     "test:lint:fix": "eslint src --ext .ts --fix",
-    "prettier": "prettier '{src,test}/**/*.ts' --write"
+    "prettier": "prettier --write \"{src,test}/**/*.ts\""
   },
   "dependencies": {
     "@tsed/ajv": "6.8.1",
@@ -29,18 +29,21 @@
     "@typegoose/typegoose": "^7.4.2",
     "@types/axios": "^0.14.0",
     "@types/cheerio": "^0.22.22",
+    "@types/config": "^0.0.36",
     "@types/mongoose": "^5.10.0",
     "ajv": "6.12.6",
     "axios": "^0.21.0",
     "body-parser": "1.19.0",
     "cheerio": "^1.0.0-rc.3",
     "compression": "1.7.4",
+    "config": "^3.3.2",
     "cookie-parser": "1.4.5",
     "cors": "2.8.5",
     "cross-env": "7.0.2",
     "express": "4.17.1",
     "helmet": "4.2.0",
     "method-override": "3.0.0",
+    "module-alias": "^2.2.2",
     "mongoose": "^5.10.14"
   },
   "devDependencies": {
@@ -76,5 +79,12 @@
       "pre-commit": "lint-staged",
       "post-commit": "git update-index --again"
     }
+  },
+  "_moduleAliases": {
+    "@infrastructure": "dist/domain/infrastructure",
+    "@models": "dist/domain/models",
+    "@plugins": "dist/domain/plugins",
+    "@services": "dist/domain/services",
+    "@stores": "dist/domain/stores"
   }
 }
