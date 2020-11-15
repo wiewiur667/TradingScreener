@@ -1,4 +1,4 @@
-# trading-screener
+# server
 
 > An awesome project based on Ts.ED framework
 
