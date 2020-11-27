@@ -7,8 +7,10 @@ import { mapString, mapNumber, mapRange, mapBool } from "./decorators";
 import { DocumentType } from "@typegoose/typegoose";
 import { ScreenerModelBase } from "../../../models/screeners/screener-model-base.model";
 
+import { IScrapeModel } from "../../scrape-model.interface";
+
 @modelOptions({ schemaOptions: { collection: "scrapingResults" } })
-export class FinVizModel extends ScreenerModelBase {
+export class FinVizModel extends ScreenerModelBase implements IScrapeModel {
   store<FinVizModel>(this: DocumentType<FinVizModel>): void {
     this.save();
   }

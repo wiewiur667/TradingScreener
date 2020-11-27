@@ -23,9 +23,11 @@
     "@tsed/di": "6.8.1",
     "@tsed/exceptions": "6.8.1",
     "@tsed/json-mapper": "6.8.1",
+    "@tsed/mongoose": "^6.8.1",
     "@tsed/platform-express": "6.8.1",
     "@tsed/schema": "6.8.1",
     "@tsed/swagger": "6.8.1",
+    "@tsed/testing-mongoose": "^6.8.1",
     "@typegoose/typegoose": "^7.4.2",
     "@types/axios": "^0.14.0",
     "@types/cheerio": "^0.22.22",
@@ -44,7 +46,7 @@
     "helmet": "4.2.0",
     "method-override": "3.0.0",
     "module-alias": "^2.2.2",
-    "mongoose": "^5.10.14"
+    "mongoose": "5.10.14"
   },
   "devDependencies": {
     "@tsed/cli-plugin-eslint": "2.1.1",

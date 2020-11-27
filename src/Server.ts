@@ -1,6 +1,7 @@
 import { Configuration, Inject } from "@tsed/di";
 import { PlatformApplication } from "@tsed/common";
 import "@tsed/platform-express"; // /!\ keep this import
+import "@tsed/mongoose";
 import * as bodyParser from "body-parser";
 import * as compress from "compression";
 import * as cookieParser from "cookie-parser";
@@ -17,6 +18,13 @@ export const rootDir = __dirname;
   acceptMimes: ["application/json"],
   httpPort: process.env.PORT || 8083,
   httpsPort: false, // CHANGE
+  mongoose: {
+    url: "mongodb://mongo:27017/trading",
+    connectionOptions: {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }
+  },
   mount: {
     "/rest": [`${rootDir}/controllers/**/*.ts`]
   },
@@ -34,10 +42,16 @@ export class Server {
   @Configuration()
   settings!: Configuration;
 
+  $beforeInit(): void {
+    // Fix fom mongoose creating empty connection
+    const m = require("mongoose");
+    m.connections = m.connections.filter((c: any) => c._connectionString != null);
+  }
+
   $beforeRoutesInit(): void {
     this.app
-      .use(helmet())
-      .use(cors())
+      //.use(helmet())
+      //.use(cors())
       .use(cookieParser())
       .use(compress({}))
       .use(methodOverride())

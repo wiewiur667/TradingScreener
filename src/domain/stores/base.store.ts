@@ -1,37 +1,18 @@
-import mongoose from "mongoose";
+// import { Inject, ProviderScope, Scope } from "@tsed/di";
+// import { $log } from "@tsed/common";
 
+@Scope(ProviderScope.SINGLETON)
 export class BaseStore {
-  client?: mongoose.Connection;
-
-  dbUrl = "";
-
-  constructor(url: string, dbName: string) {
-    this.client = undefined;
-    this.dbUrl = `${url}/${dbName}`;
+  constructor(/*@Inject(MONGOOSE_CONNECTIONS) mongoose: mongoose.Connection*/) {
+    //$log.debug(mongoose.collections);
   }
 
-  async connect(): Promise<void> {
-    try {
-      const db = await mongoose.connect(this.dbUrl, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-      });
-      this.client = db.connection;
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
+  // async checkCollectionExists(collectionName: string): Promise<boolean> {
+  //   if (this.mongooseService) {
+  //     const collections = await this.mongooseService.db.listCollections({ name: collectionName }, { nameOnly: true }).toArray();
+  //     return collections.find((c) => c.name == collectionName) != null;
+  //   }
 
-  async disconnect(): Promise<void> {
-    await mongoose.disconnect();
-  }
-
-  async checkCollectionExists(collectionName: string): Promise<boolean> {
-    if (this.client) {
-      const collections = await this.client.db.listCollections({ name: collectionName }, { nameOnly: true }).toArray();
-      return collections.find((c) => c.name == collectionName) != null;
-    }
-
-    return false;
-  }
+  //   return false;
+  // }
 }

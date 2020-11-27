@@ -1,40 +1,36 @@
-import { getModelForClass } from "@typegoose/typegoose";
-import { BaseStore } from "./base.store";
-import { Screener } from "@models/screeners/screener.model";
-import { IConfiguration } from "@infrastructure/configuration.interface";
+import { getModelForClass, ReturnModelType } from "@typegoose/typegoose";
+import { ProviderScope, Scope } from "@tsed/di";
+import { Screener } from "../models/screeners/screener.model";
 
+@Scope(ProviderScope.SINGLETON)
 export class ScreenerStore {
-  private screenerModel = getModelForClass(Screener);
-  private baseStore?: BaseStore;
+  screenerModel: ReturnModelType<typeof Screener, unknown>;
 
-  constructor(configuration: IConfiguration) {
-    this.baseStore = new BaseStore(configuration.general.databaseUrl, configuration.general.dbName);
+  constructor() {
+    this.screenerModel = getModelForClass(Screener);
   }
 
-  async connect(): Promise<void> {
-    await this.baseStore?.connect();
+  async get(name?: string): Promise<Screener[] | undefined> {
+    const query = {} as any;
+    if (name) {
+      query.Name = name;
+    }
+
+    return await this.screenerModel.find(query).exec();
   }
 
-  async disconnect(): Promise<void> {
-    await this.baseStore?.disconnect();
-  }
-
-  async getScreener(name: string): Promise<Screener | null> {
-    return (await this.screenerModel.findOne({ Name: name }).exec())?.toObject();
-  }
-
-  async addScreener(screener: Screener): Promise<void> {
+  async set(screener: Screener): Promise<Screener | undefined> {
     const screenerInstance = new this.screenerModel(screener);
-    await screenerInstance.save();
+    return await screenerInstance.save();
   }
 
-  async updateScreener(screener: Screener): Promise<void> {
+  async update(screener: Screener): Promise<Screener | undefined> {
     const screenerInstance = await this.screenerModel.findOne({ Name: screener.Name }).exec();
     await screenerInstance?.update(screener);
-    await screenerInstance?.save();
+    return await screenerInstance?.save();
   }
 
-  async deleteScreener(name: string): Promise<void> {
+  async delete(name: string): Promise<void> {
     const screenerInstance = await this.screenerModel.findOne({ Name: name }).exec();
     await screenerInstance?.remove();
   }

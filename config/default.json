@@ -1,7 +1,12 @@
 {
   "general": {
-    "databaseUrl": "mongodb://mongodb:27017",
-    "dbName": "trading"
+    "mongo": {
+      "databaseUrl": "mongodb://mongo:27017/trading",
+      "options": {
+        "useNewUrlParser": true,
+        "useUnifiedTopology": true
+      }
+    }
   },
   "screeners": [
     {

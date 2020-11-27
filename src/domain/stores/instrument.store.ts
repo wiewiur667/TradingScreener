@@ -1,5 +1,4 @@
 import { getModelForClass } from "@typegoose/typegoose";
-import { IConfiguration } from "../infrastructure/configuration.interface";
 import { IInstrumentModel } from "../models/IInstrumentModel.interface";
 import { Equity } from "../models/stock/equity.model";
 import { CFDCommodity } from "../models/stock/instrument-cfd-commodity.model";
@@ -10,19 +9,6 @@ import { BaseStore } from "./base.store";
 
 export class InstrumentStore {
   private baseStore?: BaseStore;
-
-  constructor(confguration: IConfiguration) {
-    this.baseStore = new BaseStore(confguration.general.databaseUrl, confguration.general.dbName);
-  }
-
-  async connect(): Promise<InstrumentStore> {
-    await this.baseStore?.connect();
-    return this;
-  }
-
-  async disconnect(): Promise<void> {
-    await this.baseStore?.disconnect();
-  }
 
   private trading212Instruments = {
     equity: getModelForClass(Equity),

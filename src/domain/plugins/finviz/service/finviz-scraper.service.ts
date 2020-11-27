@@ -22,6 +22,9 @@ export class FinVizScraperService implements IScraperServicePlugin {
   constructor(config: ConfigurationService) {
     this.config = config.getScraperConfig("FinViz");
   }
+  save<FinVizModel>(results: FinVizModel[]): Promise<number | undefined> {
+    
+  }
   /**
    * FinViz implementation of scraper
    * Pushes result to {results}

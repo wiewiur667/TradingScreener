@@ -1,5 +1,6 @@
 //import * as config from "../config.json"
 import { ProviderScope, Scope } from "@tsed/di";
+
 import { IScraperConfiguration } from "./config/scraper-configuration.interface";
 import { IConfiguration } from "./configuration.interface";
 import * as config from "config";

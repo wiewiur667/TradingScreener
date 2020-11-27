@@ -1,24 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { ScraperService } from "../domain/services/scrapers/scraper.service";
-import { Controller, Get, QueryParams } from "@tsed/common";
+import { Controller, Get } from "@tsed/common";
+import { ScreenerStore } from "../domain/stores/screener.store";
 
-@Controller("/hello-world")
+@Controller("/test")
 export class HelloWorldController {
-  test: string[];
-  private _scraperService: ScraperService;
+  private _screenerStore: ScreenerStore;
 
-  constructor(scraperService: ScraperService) {
-    this._scraperService = scraperService;
+  constructor(screenerStore: ScreenerStore) {
+    this._screenerStore = screenerStore;
   }
   @Get("/")
   get() {
-    this.test?.push("assad");
     return "hello";
-  }
-
-  @Get("/scrape")
-  async scraper(@QueryParams("scraper") scraper: string, @QueryParams("symbols") symbols: string[]) {
-    await this._scraperService.scrape(scraper, symbols);
-    return JSON.stringify(Array.from(this._scraperService.results.entries()));
   }
 }
