@@ -1,56 +1,50 @@
-import { ContentType, Controller, Get, Post, QueryParams, BodyParams, $log } from "@tsed/common";
-import { Status } from "@tsed/schema";
-import { BadRequest, InternalServerError } from "@tsed/exceptions";
-import { Screener } from "../domain/models/screeners/screener.model";
+import {BodyParams, Controller, Get, PathParams, Post, Put} from "@tsed/common";
+import {Conflict, NotFound} from "@tsed/exceptions";
+import {CollectionOf, Returns} from "@tsed/schema";
+import {ScreenerStoreException, ScreenerStoreExceptionType} from "../models/exceptions/ScreenerStoreException";
+import {Screener} from "../models/screeners/screener.model";
+import {ScreenerStore} from "../stores/screener.store";
 
-import { ScreenerStore } from "../domain/stores/screener.store";
-import { ScreenList } from "../domain/models/dto/screenlist";
-import { ScreenerService } from "../domain/services/screener.service"
-
-@ContentType("application/json")
-@Controller("/screeners")
-export class SreenerController {
-  private _screenerStore: ScreenerStore;
-  private _screenerService: ScreenerService;
-
-  constructor(screenerStore: ScreenerStore, screenerService: ScreenerService) {
-    this._screenerStore = screenerStore;
-    this._screenerService = screenerService;
+@Controller("/screener")
+export class ScreenerController {
+  screenerStore: ScreenerStore;
+  constructor(screenerStore: ScreenerStore) {
+    this.screenerStore = screenerStore;
   }
 
-  @Get("/")
-  async get(@QueryParams("name") name?: string): Promise<Screener[] | undefined> {
-    return await this._screenerStore.get(name);
-  }
-
-  @Post("/")
-  @Status(201)
-  @Status(400)
-  @Status(500)
-  async post(@BodyParams(Screener) screener: Screener): Promise<Screener | undefined> {
-    if (!screener) {
-      throw new BadRequest("");
-    }
+  @Post()
+  @(Returns(201, Screener).ContentType("application/json"))
+  @Returns(409, undefined)
+  async post(@BodyParams() item: Screener): Promise<Screener | undefined> {
     try {
-      return await this._screenerStore.set(screener as Screener);
+      return await this.screenerStore.set(item);
     } catch (ex) {
-      throw new InternalServerError(ex);
+      if (ex?.type == "exists") {
+        throw new Conflict(ex.message);
+      }
     }
-
-    return undefined;
   }
 
-  @Post("/screen")
-  async screen(@BodyParams(ScreenList) screenlist: ScreenList): Promise<string[] | undefined> {
-    if (!screenlist) {
-      throw new BadRequest("");
-    }
-
+  @Put("/:name/addInstruments")
+  @(Returns(200, Screener).ContentType("application/json"))
+  @Returns(409, undefined)
+  async addInstruments(
+    @PathParams("name") name: string,
+    @BodyParams() @CollectionOf(String) instruments: Array<string>
+  ): Promise<Screener | undefined> {
     try {
-      return this._screenerService.scrape(screenlist.screener, screenlist.symbols);
+      return this.screenerStore.addInstruments(name, instruments);
     } catch (ex) {
-      throw new InternalServerError(ex);
+      if (ex instanceof ScreenerStoreException) {
+        if (ex.type == ScreenerStoreExceptionType.NotExists) throw new NotFound("");
+        if (ex.type == ScreenerStoreExceptionType.MultipleFound) throw new Conflict(ex.message);
+      }
     }
-    return undefined;
+  }
+
+  @Get("/:name?")
+  @(Returns(200, Array).Of(Screener).ContentType("application/json"))
+  async get(@PathParams("name") name?: string): Promise<Screener[] | undefined> {
+    return this.screenerStore.get(name);
   }
 }
