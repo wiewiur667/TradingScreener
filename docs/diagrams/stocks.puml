@@ -1,0 +1,27 @@
+```puml
+@startuml Stocks
+class Instrument {
+  ~number Id
+  string Symbol
+  number MinTradeQty
+}
+
+class Equity extends Instrument {
+  string Company
+  string CurrencyCode
+  string ISIN
+  string MarketName
+}
+
+class CFDEquity extends Instrument {
+  string Company
+}
+
+class InstrumentCFD extends Instrument {
+  MarginRetail: number
+  MarginProfessional: numeber
+  LongPos: number;
+  ShortPos:number
+}
+@enduml
+```

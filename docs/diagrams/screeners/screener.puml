@@ -1,0 +1,13 @@
+```puml
+@startuml Screener
+!include screen-instrument.puml
+
+class Screener {
+  string Name;
+  string Url;
+  string Description;
+  bool Enabled;
+  ScreenInstrument Instruments;
+}
+@enduml
+```

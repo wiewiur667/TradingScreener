@@ -1,7 +1,5 @@
 {
   "compilerOptions": {
-    "incremental": true,
-    "tsBuildInfoFile": "./buildInfo",
     "module": "commonjs",
     "target": "es2016",
     "sourceMap": true,
@@ -27,18 +25,10 @@
     ],
     "typeRoots": [
       "./node_modules/@types"
-    ],
-    // "baseUrl": ".",
-    // "paths": {
-    //   "@infrastructure/*":["./src/domain/infrastructure/*"],
-    //   "@models/*":["./src/domain/models/*"],
-    //   "@plugins/*":["./src/domain/plugins/*"],
-    //   "@services/*":["./src/domain/services/*"],
-    //   "@stores/*":["./src/domain/stores/*"],
-    // }
+    ]
   },
   "include": [
-    "src/**/*.ts"
+    "./src/**/*.ts"
   ],
   "exclude": [
     "node_modules",

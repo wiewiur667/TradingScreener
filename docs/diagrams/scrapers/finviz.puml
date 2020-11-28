@@ -1,0 +1,98 @@
+```puml
+@startuml FinViz
+class FinVizModel {
+  map(data: Map<string, any>)
+  ~number Id
+  string Symbol
+  Date ScreenDate
+  string Index
+  number MarketCap
+  number Income
+  number Sales
+  number Book_Sh
+  number Cash_Sh  
+  number Dividend
+  number Dividend_Pct
+  number Employees
+  boolean Optionable
+  boolean Shortable 
+  number Recom
+  number P_E
+  number ForwardP_E
+  number PEG
+  number P_B
+  number P_S
+  number P_C
+  number P_FCF
+  number QuickRatio
+  number CurrentRatio
+  number Debt_Eq
+  number LTDebt_Eq
+  number SMA20_Pct
+  number EPS
+  number EPSNextY
+  number EPSNextQ
+  number EPSThisY_Pct
+  number EPSNextY_Pct
+  number EPSNext5Y_Pct
+  number EPSPast5Y_Pct
+  number SalesPast5Y_Pct
+  number SalesQ_Q_Pct
+  number EPSQ_Q_Pct
+  string Earnings
+  number SMA50_Pct
+  number InsiderOwn_Pct
+  number InsiderTrans_Pct
+  number InstOwn_Pct
+  number InstTrans_Pct
+  number ROA_Pct
+  number ROE_Pct
+  number ROI_Pct
+  number GrossMargin_Pct
+  number OperMargin_Pct
+  number ProfitMargin_Pct
+  number Payout_Pct
+  number SMA200_Pct
+  number ShsOutstand
+  number ShsFloat
+  number ShortFloat_Pct
+  number ShortRatio
+  number TargetPrice
+  number FiveTwoWeekRangeLow
+  number FiveTwoWeekRangeHigh
+  number FiveTwoWeekHigh_Pct
+  number FiveTwoWeekLow_Pct
+  number RSI14
+  number RelVolume
+  number AvgVolume
+  number Volume
+  number PerfWeek_Pct
+  number PerfMonth_Pct
+  number PerfQuarter_Pct
+  number PerfHalfY_Pct
+  number PerfY_Pct
+  number PerfYTD_Pct
+  number Beta
+  number ATR
+  number VolatilityLow_Pct
+  number VolatilityHigh_Pct
+  number PrevClose
+  number Price
+  number Change_Pct
+  FinVizRating[] Ratings
+}
+
+class FinVizRating {
+  Date Date
+  string Type
+  string Who
+  string Subtype
+  number PriceFrom
+  number PriceTo
+  string Currency
+}
+
+FinVizModel <|-- FinVizRating
+
+@enduml
+```
