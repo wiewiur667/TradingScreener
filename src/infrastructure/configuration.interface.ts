@@ -1,6 +1,6 @@
-import { ConnectionOptions } from "mongoose";
+import {ConnectionOptions} from "mongoose";
 
-import { IScraperConfiguration } from "./config/scraper-configuration.interface";
+import {IScraperConfiguration} from "./config/scraper-configuration.interface";
 
 export interface IConfiguration {
   general: {

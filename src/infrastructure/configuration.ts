@@ -14,6 +14,9 @@ export class ConfigurationService {
   }
 
   getScraperConfig(name: string): IScraperConfiguration {
-    return this.configuration.screeners.find((s) => s.name.toLowerCase() == name.toLowerCase()) ?? ({} as IScraperConfiguration);
+    return (
+      this.configuration.screeners.find((s) => s.name.toLowerCase() == name.toLowerCase()) ??
+      ({} as IScraperConfiguration)
+    );
   }
 }

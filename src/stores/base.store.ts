@@ -1,5 +1,8 @@
 import {ProviderScope, Scope} from "@tsed/di";
 
+/**
+ * @category Store
+ */
 @Scope(ProviderScope.SINGLETON)
 export class BaseStore {
   constructor(/*@Inject(MONGOOSE_CONNECTIONS) mongoose: mongoose.Connection*/) {

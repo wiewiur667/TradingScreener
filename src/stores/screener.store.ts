@@ -1,60 +1,128 @@
-import {getModelForClass, ReturnModelType} from "@typegoose/typegoose";
+import {getModelForClass, ReturnModelType, DocumentType} from "@typegoose/typegoose";
 import {ProviderScope, Scope} from "@tsed/di";
 import {Screener} from "../models/screeners/screener.model";
-import {FinVizModel} from "../plugins/finviz/model/finviz.model";
-import { ScreenInstrument } from '../models/screeners/screen-instrument.model';
-import { ScreenerStoreException, ScreenerStoreExceptionType } from '../models/exceptions/ScreenerStoreException';
+import {ScreenInstrument} from "../models/screeners/screen-instrument.model";
+import {ScreenerStoreException, ScreenerStoreExceptionType} from "../models/exceptions/ScreenerStoreException";
 
+/**
+ * Screener store
+ * @category Store
+ */
 @Scope(ProviderScope.SINGLETON)
 export class ScreenerStore {
-  screenerModel: ReturnModelType<typeof Screener, unknown>;
-  finVizModel: ReturnModelType<typeof FinVizModel, unknown>;
+  private screenerModel: ReturnModelType<typeof Screener, unknown>;
 
   constructor() {
     this.screenerModel = getModelForClass(Screener);
-    this.finVizModel = getModelForClass(FinVizModel);
   }
 
-  async get(name?: string): Promise<Screener[] | undefined> {
+  /**
+   * Gets screener(s)
+   * @param name Name of Screener
+   * @param single If only one item required
+   * @category CRUD
+   */
+  async get(name?: string, single = true): Promise<DocumentType<Screener> | DocumentType<Screener>[] | null> {
     const query = {} as any;
     if (name) query.Name = {$regex: new RegExp(name, "i")};
+    const result = await this.screenerModel.find(query).exec();
+    if (!result || (result && result.length == 0)) {
+      throw new ScreenerStoreException(ScreenerStoreExceptionType.NotExists, "Not Found");
+    }
+    if (single) return result[0];
 
-    return await this.screenerModel.find(query).exec();
+    return result;
   }
 
-  async set(screener: Screener): Promise<Screener | undefined> {
-    const items = await this.get(screener.Name);
-    if (items && items.length > 0) throw {type: "exists", message: `Screener with name ${screener.Name} already exists!`};
+  /**
+   * Insterts Screener
+   * @param screener
+   * @throws {ScreenerStoreException}
+   * @category CRUD
+   */
+  async insert(screener: Screener): Promise<Screener | null> {
+    // get throws exception when item is not found, we can expect that and silently swallow NotExists type
+    try {
+      const item = (await this.get(screener.Name)) as Screener;
+      if (item)
+        throw new ScreenerStoreException(
+          ScreenerStoreExceptionType.Exists,
+          `Screener with name ${screener.Name} already exists!`
+        );
+    } catch (ex) {
+      if (
+        !(ex instanceof ScreenerStoreException) ||
+        (ex instanceof ScreenerStoreException && ex.type == ScreenerStoreExceptionType.NotExists)
+      )
+        throw ex;
+    }
 
     const screenerInstance = new this.screenerModel(screener);
-    return await screenerInstance.save();
+    return (await screenerInstance.save()) ?? null;
   }
 
-  async update(screener: Screener): Promise<Screener | undefined> {
-    const screenerInstance = await this.screenerModel.findOne({Name: screener.Name}).exec();
+  /**
+   * Updates Screener
+   * @param screener Screener to update, matches on Name
+   * @category CRUD
+   */
+  async update(screener: Screener): Promise<Screener | null> {
+    const screenerInstance = (await this.get(screener.Name)) as DocumentType<Screener>;
     await screenerInstance?.update(screener);
-    return await screenerInstance?.save();
+
+    return (await screenerInstance?.save()) ?? null;
   }
 
+  /**
+   * Deletes Screener
+   * @param name Name of {Screener} to delete
+   * @category CRUD
+   */
   async delete(name: string): Promise<void> {
-    const screenerInstance = await this.screenerModel.findOne({Name: name}).exec();
+    const screenerInstance = (await this.get(name)) as DocumentType<Screener>;
     await screenerInstance?.remove();
   }
 
-  async addInstruments(name: string, symbols: string[]): Promise<Screener | undefined> {
-    const screeners = await this.get(name);
-    if (screeners) {
-      if (screeners.length == 1) {
-        const instrumentsFromString = symbols.map((i) => new ScreenInstrument(i));
-        screeners[0].Instruments.push(...instrumentsFromString);
-        return await this.update(screeners[0]);
-      } else if (screeners.length > 0) {
-        throw new ScreenerStoreException(ScreenerStoreExceptionType.MultipleFound);
-      } else {
-        throw new ScreenerStoreException(ScreenerStoreExceptionType.NotExists);
+  /**
+   * Gets Instruments from the Screener
+   * @param name Name of Screener
+   * @category Instruments
+   */
+  async getInstruments(name: string): Promise<ScreenInstrument[] | null> {
+    const screenerInstance = (await this.get(name)) as DocumentType<Screener>;
+    return await screenerInstance.Instruments;
+  }
 
-      }
-    }
-    return undefined;
+  /**
+   * Adds Instruments to the Screener
+   * @param name Name of Screener
+   * @param instruments List of instrument symbols
+   * @category Instruments
+   */
+  async addInstruments(name: string, instruments: string[]): Promise<Screener | null> {
+    const screenerInstance = (await this.get(name)) as DocumentType<Screener>;
+    return await screenerInstance.addInstruments(instruments);
+  }
+
+  /**
+   * Deletes instruments from the Screener
+   * @param name Name of Screener
+   * @param instruments List of instrument symbols to delete
+   * @category Instruments
+   */
+  async deleteInstruments(name: string, instruments: string[]): Promise<Screener | null> {
+    const screenerInstance = (await this.get(name)) as DocumentType<Screener>;
+    return await screenerInstance.deleteInstruments(instruments);
+  }
+
+  /**
+   * Updates instruments in the Screener
+   * @param name Name of Screener
+   * @param instruments Instruments to update
+   * @category Instruments
+   */
+  async updateInstruments(name: string, instruments: ScreenInstrument[]): Promise<Screener | null> {
+    const screenerInstance = (await this.get(name)) as DocumentType<Screener>;
+    return await screenerInstance.updateInstruments(instruments);
   }
 }

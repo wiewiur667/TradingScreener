@@ -6,6 +6,7 @@ import {FinVizScraperService} from "../plugins/finviz/service/finviz-scraper.ser
 import {IScrapeModel} from "../plugins/scrape-model.interface";
 
 import Bottleneck from "bottleneck";
+import {ScreenerStore} from "../stores/screener.store";
 /**
  * Wrapper around specific scrapers
  *
@@ -23,11 +24,15 @@ export class ScraperService implements IScraperService {
 
   results: Map<string, unknown[]> = new Map<string, unknown[]>();
 
-  constructor(finviz: FinVizScraperService) {
+  screenerStore: ScreenerStore;
+
+  constructor(finviz: FinVizScraperService, screenerStore: ScreenerStore) {
     this.services.push({
       name: "FinViz",
       service: finviz
     });
+
+    this.screenerStore = screenerStore;
   }
 
   /**
@@ -35,7 +40,7 @@ export class ScraperService implements IScraperService {
    * @param scraperPluginName
    * @param symbols
    */
-  async scrape(scraperPluginName: string, symbols: string[]): Promise<IScrapeModel[]> {
+  async scrape(scraperPluginName: string, symbols: string[], save = true): Promise<IScrapeModel[]> {
     const scraper = (this.services.find((a) => a.name == scraperPluginName) as any).service as IScraperServicePlugin;
     const results: IScrapeModel[] = [];
 

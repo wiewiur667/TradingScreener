@@ -3,6 +3,9 @@ import {Returns} from "@tsed/schema";
 import {IScrapeModel} from "../plugins/scrape-model.interface";
 import {ScraperService} from "../services/scraper.service";
 
+/**
+ * @category Controller
+ */
 @Controller("/scraper")
 export class ScraperController {
   screenerService: ScraperService;
@@ -10,7 +13,7 @@ export class ScraperController {
   constructor(screenerService: ScraperService) {
     this.screenerService = screenerService;
   }
-  
+
   @Post("/scrape")
   @(Returns(200, Object).ContentType("application/json")) // => 'application/json'
   async scrape(@BodyParams() symbols: string[]): Promise<IScrapeModel[]> {

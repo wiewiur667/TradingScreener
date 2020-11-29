@@ -10,5 +10,6 @@ export class ScreenerStoreException extends Error {
 export enum ScreenerStoreExceptionType {
   Exists,
   NotExists,
-  MultipleFound
+  MultipleFound,
+  Empty
 }

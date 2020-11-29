@@ -1,4 +1,4 @@
-import { DocumentType } from "@typegoose/typegoose";
+import {DocumentType} from "@typegoose/typegoose";
 
 export interface IScraperModel {
   map(data: Map<string, unknown>): void;

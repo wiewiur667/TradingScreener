@@ -2,7 +2,7 @@ import {modelOptions, prop} from "@typegoose/typegoose";
 
 import {FinVizRating} from "./finviz-rating.model";
 
-import {mapString, mapNumber, mapRange, mapBool} from "./decorators";
+import {mapBool, mapNumber, mapRange, mapString} from "./finviz.decorators";
 
 import {DocumentType} from "@typegoose/typegoose";
 import {ScreenerModelBase} from "../../../models/screeners/screener-model-base.model";
@@ -13,33 +13,6 @@ import {IScrapeModel} from "../../scrape-model.interface";
 export class FinVizModel extends ScreenerModelBase implements IScrapeModel {
   store<FinVizModel>(this: DocumentType<FinVizModel>): void {
     this.save();
-  }
-
-  map(data: Map<string, any>): void {
-    const properties = Reflect.getMetadata("finviz:mapping", this) as any;
-
-    properties.forEach((k: any) => {
-      try {
-        let val;
-        switch (k.type) {
-          case "string":
-            val = data.get(k.mapping);
-            break;
-          case "number":
-            val = this.parseNumber(data.get(k.mapping));
-            break;
-          case "range":
-            val = this.parseNumber(this.parseRange(data.get(k.mapping))[k.order]);
-            break;
-          case "boolean":
-            val = this.parseBoolean(data.get(k.mapping));
-            break;
-        }
-        (this as any)[k.key] = val;
-      } catch (err) {
-        console.error(err);
-      }
-    });
   }
 
   @prop()
@@ -349,6 +322,33 @@ export class FinVizModel extends ScreenerModelBase implements IScrapeModel {
 
   @prop({type: () => [FinVizRating]})
   Ratings?: FinVizRating[];
+
+  map(data: Map<string, any>): void {
+    const properties = Reflect.getMetadata("finviz:mapping", this) as any;
+
+    properties.forEach((k: any) => {
+      try {
+        let val;
+        switch (k.type) {
+          case "string":
+            val = data.get(k.mapping);
+            break;
+          case "number":
+            val = this.parseNumber(data.get(k.mapping));
+            break;
+          case "range":
+            val = this.parseNumber(this.parseRange(data.get(k.mapping))[k.order]);
+            break;
+          case "boolean":
+            val = this.parseBoolean(data.get(k.mapping));
+            break;
+        }
+        (this as any)[k.key] = val;
+      } catch (err) {
+        console.error(err);
+      }
+    });
+  }
 
   parseNumber(numberString: string): number {
     if (numberString.indexOf("-") > -1) {

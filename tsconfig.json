@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "incremental": true,
+    "tsBuildInfoFile": "./buildcache/server",
     "module": "commonjs",
     "target": "es2016",
     "sourceMap": true,

@@ -7,6 +7,9 @@ import {CFDIndex} from "../models/stock/instrument-cfd-index.model";
 import {CFDStock} from "../models/stock/instrument-cfd-stock.model";
 import {BaseStore} from "./base.store";
 
+/**
+ * @category Store
+ */
 export class InstrumentStore {
   private baseStore?: BaseStore;
 

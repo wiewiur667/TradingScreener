@@ -1,5 +1,5 @@
-import { prop } from "@typegoose/typegoose";
-import { InstrumentBase } from "./stock.base.model";
+import {prop} from "@typegoose/typegoose";
+import {InstrumentBase} from "./stock.base.model";
 
 /**
  * Abstract

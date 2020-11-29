@@ -71,7 +71,9 @@ export class FinVizScraperService implements IScraperServicePlugin {
   }
 
   private getRatings($: cheerio.Root): FinVizRating[] {
-    const data = $("table.fullview-ratings-outer tr[class^='body-table-rating-'] tr[class^='body-table-rating-']").toArray();
+    const data = $(
+      "table.fullview-ratings-outer tr[class^='body-table-rating-'] tr[class^='body-table-rating-']"
+    ).toArray();
     return data.map((r: any) => {
       const columns = $($(r).children()).toArray();
       const result = new FinVizRating();
