@@ -38,5 +38,13 @@
   ],
   "linterOptions": {
     "exclude": []
+  },
+  "typedocOptions": {
+    "inputFiles":["./src"],
+    //"entryPoint": "Server",
+    "mode": "file",
+    "out": "docs/docs",
+    "theme": "default",
+    "name": "Trading Screener by Seb"
   }
 }
