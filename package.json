@@ -11,7 +11,8 @@
     "test:lint": "eslint src --ext .ts",
     "test:lint:fix": "eslint src --ext .ts --fix",
     "prettier": "prettier \"src/**/*.ts\" --write",
-    "docs": "typedoc --tsconfig tsconfig.json"
+    "docs": "typedoc --tsconfig tsconfig.json --out docs/html --plugin none",
+    "docs:markdown": "typedoc --tsconfig tsconfig.json --out docs/markdown"
   },
   "dependencies": {
     "@tsed/ajv": "^6.11.3",
